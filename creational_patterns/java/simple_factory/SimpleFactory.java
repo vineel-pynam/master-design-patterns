@@ -1,3 +1,5 @@
+package creational_patterns.java.simple_factory;
+
 // Log types as enums
 enum LogType{
     ERROR, DEBUG, INFO
@@ -33,11 +35,11 @@ class InfoLogger implements ILogger{
 // Logger factory - creates a logger object based on log type.
 class LoggerFactory{
 
-    public ILogger getLogger(){
+    public ILogger createLogger(){
         return new InfoLogger();
     }
 
-    public ILogger getLogger(LogType logType){
+    public ILogger createLogger(LogType logType){
         switch (logType){
             case INFO:
                 return new InfoLogger();
@@ -52,19 +54,19 @@ class LoggerFactory{
 }
 
 // Client
-class Main{
+class SimpleFactory{
     public static void main(String args[]){
         LoggerFactory loggerFactory = new LoggerFactory();
 
         // InfoLogger as default
-        ILogger logger = loggerFactory.getLogger();
+        ILogger logger = loggerFactory.createLogger();
         logger.log("Hola..!");
 
         // Specific Loggers
-        logger = loggerFactory.getLogger(LogType.DEBUG);
+        logger = loggerFactory.createLogger(LogType.DEBUG);
         logger.log("Hola..!");
 
-        logger = loggerFactory.getLogger(LogType.ERROR);
+        logger = loggerFactory.createLogger(LogType.ERROR);
         logger.log("Hola..!");
     }
 }
