@@ -47,6 +47,7 @@ class DairyMilkChocolate implements ChocolatePrototype{
     }
 }
 
+// Client
 class PrototypePattern {
     public static void main(String args[]){
         ChocolatePrototype fiveStar = new FiveStarChocolate("FiveStar", "Nah, I'm fine here.");
@@ -55,7 +56,7 @@ class PrototypePattern {
         System.out.println("Original: ");
         fiveStar.display();
         dairyMilk.display();
-        
+
         System.out.println();
 
         ChocolatePrototype fiveStarClone = fiveStar.clone();
