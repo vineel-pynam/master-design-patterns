@@ -8,14 +8,7 @@ This project implements the **Observer Pattern** by simulating weather stations 
 ## Project Structure
 ```
 behavioural_patterns/java/observer_pattern/
-│-- WeatherData.java        // POJO class holding weather information
-│-- IObserver.java          // Observer interface
-│-- WeatherDisplayer.java   // Concrete Observer for temperature display
-│-- HumidityDisplayer.java  // Concrete Observer for humidity display
-│-- IWeatherStation.java    // Subject (Weather Station) interface
-│-- HyderabadWeatherStation.java // Concrete Subject (Hyderabad)
-│-- BangloreWeatherStation.java  // Concrete Subject (Bangalore)
-│-- ObserverPattern.java    // Client class (Main)
+│-- ObserverPattern.java 
 ```
 
 ## How It Works

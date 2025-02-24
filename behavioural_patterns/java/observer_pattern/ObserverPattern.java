@@ -142,6 +142,7 @@ class BangloreWeatherStation implements IWeatherStation{
     }
 }
 
+// Client
 class ObserverPattern {
     public static void main(String[] args) {
         // Hyderabad Locaton
