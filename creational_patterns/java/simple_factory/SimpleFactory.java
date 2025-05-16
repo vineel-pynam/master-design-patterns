@@ -1,4 +1,6 @@
 package creational_patterns.java.simple_factory;
+import java.util.function.*;
+import java.util.*;;
 
 // Log types as enums
 enum LogType{
@@ -35,22 +37,39 @@ class InfoLogger implements ILogger{
 // Logger factory - creates a logger object based on log type.
 class LoggerFactory{
 
-    public ILogger createLogger(){
-        return new InfoLogger();
+    private final static Map<LogType, Supplier<ILogger>> store = new HashMap<>();
+
+    static {
+        register(LogType.DEBUG, DebugLogger::new);
+        register(LogType.ERROR, ErrorLogger::new);
+        register(LogType.INFO, InfoLogger::new);
+    }
+
+    private static void register(LogType logType, Supplier<ILogger> supplier){
+        store.put(logType, supplier);   
     }
 
     public ILogger createLogger(LogType logType){
-        switch (logType){
-            case INFO:
-                return new InfoLogger();
-            case DEBUG:
-                return new DebugLogger();
-            case ERROR:
-                return new ErrorLogger();
-            default:
-                return new InfoLogger();
+        Supplier<ILogger> supplier = store.get(logType);
+        if( supplier != null ){
+            return supplier.get();
         }
+        return null;
     }
+
+    // Voilates OCP
+    // public ILogger createLogger(LogType logType){
+    //     switch (logType){
+    //         case INFO:
+    //             return new InfoLogger();
+    //         case DEBUG:
+    //             return new DebugLogger();
+    //         case ERROR:
+    //             return new ErrorLogger();
+    //         default:
+    //             return new InfoLogger();
+    //     }
+    // }
 }
 
 // Client
@@ -58,11 +77,8 @@ class SimpleFactory{
     public static void main(String args[]){
         LoggerFactory loggerFactory = new LoggerFactory();
 
-        // InfoLogger as default
-        ILogger logger = loggerFactory.createLogger();
-        logger.log("Hola..!");
-
         // Specific Loggers
+        ILogger logger;
         logger = loggerFactory.createLogger(LogType.DEBUG);
         logger.log("Hola..!");
 
